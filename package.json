@@ -1,0 +1,15 @@
+{
+  "name": "lovlyboy-pairing-server",
+  "version": "1.0.0",
+  "description": "WhatsApp pairing server by Lovly Boy",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "@whiskeysockets/baileys": "^7.0.0-rc.9",
+    "pino": "^9.0.0"
+  }
+}
