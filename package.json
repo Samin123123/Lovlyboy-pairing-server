@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "@whiskeysockets/baileys": "^7.0.0-rc.9",
-    "pino": "^9.0.0",
     "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=25.0.0"
   }
 }
