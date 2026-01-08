@@ -1,7 +1,6 @@
 {
   "name": "lovlyboy-pairing-server",
   "version": "1.0.0",
-  "description": "WhatsApp pairing server by Lovly Boy",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
