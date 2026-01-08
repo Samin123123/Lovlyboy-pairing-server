@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💗 LovlyBoy WhatsApp Pairing 💗</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #ff4b2b;
+      text-shadow: 2px 2px #fff;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    input {
+      padding: 12px 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 2px solid #ff4b2b;
+      margin-bottom: 10px;
+      width: 250px;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 5px;
+      background: linear-gradient(45deg, #ff4b2b, #ff416c);
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #ff4b2b;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <h1>💗 LovlyBoy WhatsApp Pairing 💗</h1>
+  <input type="text" id="number" placeholder="Enter WhatsApp number">
+  <div>
+    <button onclick="generatePair()">Generate Pairing Code</button>
+    <button onclick="copyCode()">Copy Code</button>
+  </div>
+  <div id="result">Your Pairing Code will appear here</div>
+
+  <script>
+    let lastCode = "";
+
+    async function generatePair() {
+      const number = document.getElementById('number').value.trim();
+      const result = document.getElementById('result');
+
+      if(!number) {
+        result.innerText = "❌ Please enter a number!";
+        return;
+      }
+
+      try {
+        const res = await fetch('https://lovlyboy-pairing.onrender.com/pair', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ number })
+        });
+
+        const data = await res.json();
+        if(data.success) {
+          lastCode = data.code;
+          result.innerText = "✅ Your Pairing Code: " + data.code;
+        } else {
+          result.innerText = "❌ Error: " + data.error;
+        }
+      } catch(err) {
+        result.innerText = "❌ Server error. Try again!";
+      }
+    }
+
+    function copyCode() {
+      if(!lastCode) {
+        alert("No code to copy! Generate first.");
+        return;
+      }
+      navigator.clipboard.writeText(lastCode).then(() => {
+        alert("✅ Pairing code copied!");
+      });
+    }
+  </script>
+</body>
+</html>
